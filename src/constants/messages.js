@@ -9,6 +9,7 @@ const messages = {
     USERNAME_NOT_FOUND: 'Username is not found',
     ACCOUNT_NOT_FOUND: 'Sorry, you do not have an account',
     EMAIL_NOT_FOUND: 'Email is not found',
+    ACCOUNT_CREATED: 'Account successfully created',
     ROUTE_NOT_FOUND: 'Route not found',
     WALLET_NOT_EXIST: 'Wallet does not exist',
     INVALID_TOKEN: 'Token is invalid or expired',
@@ -30,10 +31,8 @@ const messages = {
     DB_ERROR: 'An error occured while trying to perform the database operation',
     OPERATION_SUCCESS: 'Operation successful',
     OPERATION_FAILURE: 'Operation failed',
-    INCORRECT_MESSAGE: 'User did not sign the correct message',
     HYDRO_AUTH_USER_ERROR: 'User was authenticated with the Hydro API, but the status could not be saved in the database',
     HYDRO_ID_NOT_FOUND: 'The HydroID does not exist. So, it cannot be registered',
-    USER_NOT_VERIFIED: 'User is not verified',
 };
 
 module.exports = messages;
