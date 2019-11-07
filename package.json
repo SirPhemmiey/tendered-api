@@ -21,6 +21,8 @@
     "main": "index.js",
     "license": "MIT",
     "dependencies": {
+        "agenda": "^2.1.0",
+        "agendash": "^1.0.0",
         "ajv": "^6.10.2",
         "ajv-errors": "^1.0.1",
         "app-root-path": "^3.0.0",

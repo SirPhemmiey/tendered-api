@@ -1,3 +1,5 @@
+/* eslint-disable func-call-spacing */
+/* eslint-disable space-before-function-paren */
 /* eslint-disable eol-last */
 /* eslint-disable indent */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -15,7 +17,7 @@ const { errorHandler } = require('./src/utils/middleware/error');
 const logger = require('./src/config/winston');
 const code = require('./src/constants/codes');
 const message = require('./src/constants/messages');
-
+const agendaStart = require('./src/jobs/agenda');
 const supplierRoute = require('./src/routes/supplierRoute');
 const contractorRoute = require('./src/routes/contractorRoute');
 const route = require('./src/routes');
@@ -55,9 +57,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(compression());
 
 /** Application Routes */
-app.use('/v1/supplier', supplierRoute);
-app.use('/v1/contractor', contractorRoute);
-app.use('/v1', route);
+app.use('/api/v1/supplier', supplierRoute);
+app.use('/api/v1/contractor', contractorRoute);
+app.use('/api/v1', route);
 
 /** Catch errors handler */
 app.use(errorHandler);
@@ -73,4 +75,8 @@ app.use((req, res, next) => {
     res.status(errorObj.statusCode).json(errorObj);
 });
 
+(async() => {
+    await agendaStart();
+})
+();
 module.exports = app;

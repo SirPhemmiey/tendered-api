@@ -12,7 +12,7 @@ const responseFormat = require('../utils/responseFormat');
 
 const RequestModel = require('../models/request');
 const BidModel = require('../models/bid');
-const WonBidModel = require('../models/won_bid');
+// const WonBidModel = require('../models/won_bid');
 
 
 const ajv = Ajv({ allErrors: true, $data: true });
