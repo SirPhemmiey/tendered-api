@@ -47,7 +47,7 @@ exports.contractorRegistration = {
     required: ['username', 'password', 'confirm_password'],
 };
 
-exports.contractorRequest = {
+exports.contractorAddRequest = {
     properties: {
         contractor: {
             type: 'number',
@@ -66,13 +66,6 @@ exports.contractorRequest = {
         },
         location: {
             type: 'string',
-        },
-        status: {
-            type: 'string',
-        },
-        post_date: {
-            type: 'string',
-            format: 'date',
         },
         timeline: {
             type: 'string',

@@ -13,6 +13,8 @@ const schema = require('../utils/validators/contractorValidator');
 const responseFormat = require('../utils/responseFormat');
 
 const ContractorModel = require('../models/contractor');
+const RequestModel = require('../models/request');
+
 
 const saltRounds = bcrypt.genSaltSync(10);
 dotenv.config();
@@ -141,8 +143,17 @@ class Contractor {
         }
     }
 
-    status async addRequest(req, res) {
-        const validate = ajv.compile(schema.contractorRequest);
+    /**
+     *
+     * @description Add New Request
+     * @static
+     * @param {*} req Request object
+     * @param {*} res Response object
+     * @returns {object}
+     * @memberof Contractor
+     */
+    static async addRequest(req, res) {
+        const validate = ajv.compile(schema.contractorAddRequest);
         let data = {};
 
         // Validate the request or query params
@@ -159,9 +170,9 @@ class Contractor {
             model,
             capacity,
             location,
-            timeline
+            timeline,
         } = req.body;
-        const newRequest = await ContractorModel.create({
+        const newRequest = await RequestModel.create({
             contractor_id: contractor,
             machine_name,
             year,
@@ -170,7 +181,7 @@ class Contractor {
             location,
             status: 'pending',
             post_date: new Date(),
-            timeline
+            timeline,
         });
         if (newRequest) {
             data = {
@@ -182,6 +193,72 @@ class Contractor {
                 },
             };
             return responseFormat.handleSuccess(res, data);
+        }
+    }
+
+    /**
+     *
+     * @description Delete Request
+     * @static
+     * @param {*} req Request object
+     * @param {*} res Response object
+     * @returns {object}
+     * @memberof Contractor
+     */
+    static async deleteRequest(req, res) {
+        const contractor_id = req.contractor.id;
+        const request_id = req.body.request_id;
+        try {
+            let data = {};
+            const deleteUser = await RequestModel.deleteOne({ contractor_id, _id: request_id });
+            if (deleteUser) {
+                data = {
+                    res,
+                    status: message.SUCCESS,
+                    statusCode: code.OK,
+                    data: {
+                        message: message.OPERATION_SUCCESS,
+                    },
+                };
+                return responseFormat.handleSuccess(res, data);
+            }
+        } catch (err) {
+            logger.error('Request Delete Error', err);
+            const { output } = Boom.badImplementation();
+            output.payload.message = err.message;
+            return responseFormat.handleError(res, output);
+        }
+    }
+
+    /**
+     *
+     * @description List All Requests (Pending | Completed)
+     * @static
+     * @param {*} req Request object
+     * @param {*} res Response object
+     * @returns {object} object with an array of requests
+     * @memberof Contractor
+     */
+    static async requests(req, res) {
+        const status = req.body.status;
+        const contractor_id = req.contractor.id;
+        try {
+            let data = {};
+            const requests = await RequestModel.find({ contractor_id, status });
+            data = {
+                res,
+                status: message.SUCCESS,
+                statusCode: code.OK,
+                data: {
+                    requests,
+                },
+            };
+            return responseFormat.handleSuccess(res, data);
+        } catch (err) {
+            logger.error('List Requests Error', err);
+            const { output } = Boom.badImplementation();
+            output.payload.message = err.message;
+            return responseFormat.handleError(res, output);
         }
     }
 }
