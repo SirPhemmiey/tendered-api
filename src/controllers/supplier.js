@@ -227,7 +227,7 @@ class Supplier {
      * @param {*} req Request object
      * @param {*} res Response object
      * @returns {object} object with an array of requests
-     * @memberof Contractor
+     * @memberof Supplier
      */
     static async requests(req, res) {
         try {
