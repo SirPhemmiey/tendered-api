@@ -3,15 +3,13 @@
 const mongoose = require('mongoose');
 
 const supplierSchema = new mongoose.Schema({
-    username: String,
-    password: String,
+    firstname: String,
+    lastname: String,
+    auth: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Auth',
+    },
 });
-
-// define compound indexes in the schema
-supplierSchema.index({
-    username: 1,
-});
-
 
 const Supplier = mongoose.model('Supplier', supplierSchema);
 

@@ -32,6 +32,7 @@ class Supplier {
      * @memberof Supplier
      */
     static async bidRequest(req, res) {
+        const supplier = req.supplier.id;
         const validate = ajv.compile(schema.supplierBid);
         let data = {};
 
@@ -43,15 +44,14 @@ class Supplier {
             return responseFormat.handleError(res, output);
         }
         const {
-            contractor,
-            supplier,
             request,
+            bid_price,
         } = req.body;
         const newBid = await BidModel.create({
-            contractor,
             supplier,
             request,
             bid_date: new Date(),
+            bid_price,
         });
         if (newBid) {
             data = {
@@ -106,10 +106,10 @@ class Supplier {
      * @returns {object} object with an array of requests
      * @memberof Supplier
      */
-    static async requests(req, res) {
+    static async liveRequests(req, res) {
         try {
             let data = {};
-            const requests = await RequestModel.find({});
+            const requests = await RequestModel.find({ status: { $ne: 'completed' } }).select('-contractor -__v -createdAt -updatedAt');
             data = {
                 res,
                 status: message.SUCCESS,

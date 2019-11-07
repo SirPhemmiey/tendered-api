@@ -2,9 +2,6 @@
 /* eslint-disable indent */
 exports.contractorAddRequest = {
     properties: {
-        contractor: {
-            type: 'string',
-        },
         machine_name: {
             type: 'string',
         },
@@ -25,5 +22,29 @@ exports.contractorAddRequest = {
             format: 'date',
         },
     },
-    required: ['contractor', 'machine_name', 'year', 'model', 'capacity', 'location', 'timeline'],
+    required: ['machine_name',
+        'year',
+        'model',
+        'capacity',
+        'location',
+        'timeline',
+    ],
+};
+
+exports.contractorListRequests = {
+    properties: {
+        status: {
+            type: 'string',
+            enum: ['pending', 'completed'],
+        },
+    },
+}
+
+exports.contractorRequestBids = {
+    properties: {
+        request: {
+            type: 'string',
+        },
+    },
+    required: ['request'],
 };

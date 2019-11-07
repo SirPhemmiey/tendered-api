@@ -3,7 +3,7 @@
 const mongoose = require('mongoose');
 
 const requestSchema = new mongoose.Schema({
-    contractor_id: {
+    contractor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contractor',
     },
@@ -19,8 +19,7 @@ const requestSchema = new mongoose.Schema({
     post_date: Date,
     timeline: Date,
 }, {
-    // toJSON: true,
-    timestamps: true,
+    versionKey: false,
 });
 
 // define compound indexes in the schema

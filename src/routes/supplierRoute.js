@@ -29,7 +29,7 @@ function authenticate() {
 const router = express.Router();
 
 router.post('/bid', authenticate(), Supplier.bidRequest);
-router.get('/allRequests', authenticate(), Supplier.requests);
+router.get('/liveRequests', authenticate(), Supplier.liveRequests);
 router.get('/awardedBids', authenticate(), Supplier.awardedBids);
 
 module.exports = router;

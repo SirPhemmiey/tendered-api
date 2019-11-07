@@ -3,15 +3,13 @@
 const mongoose = require('mongoose');
 
 const contractorSchema = new mongoose.Schema({
-    username: String,
-    password: String,
+    firstname: String,
+    lastname: String,
+    auth: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Auth',
+    },
 });
-
-// define compound indexes in the schema
-contractorSchema.index({
-    username: 1,
-});
-
 
 const Contractor = mongoose.model('Contractor', contractorSchema);
 
