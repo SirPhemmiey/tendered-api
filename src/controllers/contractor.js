@@ -173,7 +173,7 @@ class Contractor {
             timeline,
         } = req.body;
         const newRequest = await RequestModel.create({
-            contractor_id: contractor,
+            contractor,
             machine_name,
             year,
             model,
@@ -206,11 +206,11 @@ class Contractor {
      * @memberof Contractor
      */
     static async deleteRequest(req, res) {
-        const contractor_id = req.contractor.id;
+        const contractor = req.contractor.id;
         const request_id = req.body.request_id;
         try {
             let data = {};
-            const deleteUser = await RequestModel.deleteOne({ contractor_id, _id: request_id });
+            const deleteUser = await RequestModel.deleteOne({ contractor, _id: request_id });
             if (deleteUser) {
                 data = {
                     res,
@@ -241,10 +241,10 @@ class Contractor {
      */
     static async requests(req, res) {
         const status = req.body.status;
-        const contractor_id = req.contractor.id;
+        const contractor = req.contractor.id;
         try {
             let data = {};
-            const requests = await RequestModel.find({ contractor_id, status });
+            const requests = await RequestModel.find({ contractor, status });
             data = {
                 res,
                 status: message.SUCCESS,

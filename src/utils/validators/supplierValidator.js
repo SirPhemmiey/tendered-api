@@ -59,10 +59,6 @@ exports.supplierBid = {
         request: {
             type: 'number',
         },
-        bid_date: {
-            type: 'string',
-            format: 'date',
-        },
     },
-    required: ['supplier', 'contractor', 'request', 'bid_date'],
+    required: ['supplier', 'contractor', 'request'],
 };

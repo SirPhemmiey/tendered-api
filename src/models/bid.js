@@ -3,15 +3,15 @@
 const mongoose = require('mongoose');
 
 const bidSchema = new mongoose.Schema({
-    supplier_id: {
+    supplier: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Supplier',
     },
-    contractor_id: {
+    contractor: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Contractor',
     },
-    request_id: {
+    request: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Request',
     },
@@ -25,9 +25,9 @@ const bidSchema = new mongoose.Schema({
 
 // define compound indexes in the schema
 bidSchema.index({
-    supplier_id: 1,
-    contractor_id: 1,
-    request_id: 1,
+    supplier: 1,
+    contractor: 1,
+    request: 1,
 });
 
 
