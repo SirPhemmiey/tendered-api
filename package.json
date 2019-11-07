@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "Tendered API",
     "engines": {
-        "node": "12.12.0"
+        "node": "10.16.3"
     },
     "scripts": {
         "check-coverage": "istanbul check-coverage",
@@ -36,6 +36,7 @@
         "http-status-codes": "^1.4.0",
         "jsonwebtoken": "^8.5.1",
         "loadash": "^1.0.0",
+        "moment": "^2.24.0",
         "mongoose": "^5.7.8",
         "morgan": "^1.9.1",
         "passport": "^0.4.0",

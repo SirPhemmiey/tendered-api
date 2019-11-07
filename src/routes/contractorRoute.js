@@ -28,8 +28,6 @@ function authenticate() {
 
 const router = express.Router();
 
-router.post('/register', Contractor.register);
-router.post('/login', Contractor.login);
 router.post('/addRequest', authenticate(), Contractor.addRequest);
 router.get('/allRequests', authenticate(), Contractor.requests);
 router.get('/deleteRequest', authenticate(), Contractor.deleteRequest);

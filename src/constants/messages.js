@@ -21,7 +21,7 @@ const messages = {
     PASSWORD_UPDATE_FAILURE: 'Password update failed',
     PASSWORD_UPDATE_SUCCESS: 'Password update successful',
     OLD_PASSWORD_NOT_CORRECT: 'Old password is not correct',
-    EMAIL_EXIST: 'Email already exist',
+    USERNAME_EXIST: 'Username already exist',
     WRONG_USERNAME_PASSWORD: 'Username or Password is not correct',
     KEY_EXPIRED: 'Key/Token/Code has expired.',
     KEY_INVALID: 'Key/Token/Code is invalid',

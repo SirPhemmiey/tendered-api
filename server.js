@@ -18,6 +18,7 @@ const message = require('./src/constants/messages');
 
 const supplierRoute = require('./src/routes/supplierRoute');
 const contractorRoute = require('./src/routes/contractorRoute');
+const route = require('./src/routes');
 
 
 require('./src/utils/database');
@@ -56,6 +57,7 @@ app.use(compression());
 /** Application Routes */
 app.use('/v1/supplier', supplierRoute);
 app.use('/v1/contractor', contractorRoute);
+app.use('/v1', route);
 
 /** Catch errors handler */
 app.use(errorHandler);
