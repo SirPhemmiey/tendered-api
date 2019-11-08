@@ -1,0 +1,33 @@
+version: '3.5'
+volumes:
+    mongo-data: null
+services:
+    tenderd-api:
+        container_name: tendered-api
+        build:
+            context: .
+            dockerfile: DockerFile.development
+        command:
+            - make
+            - start_server
+        env_file:
+            - .env
+        environment:
+            MONGO_URL: 'mongodb://mongo/tendered-challenge'
+            PORT: 80
+        restart: always
+        ports:
+            - '80:80'
+        volumes:
+            - /opt/node_modules
+            - './:/opt'
+        links:
+            - mongo
+    mongo:
+        container_name: tendered-mongo
+        image: mongo
+        volumes:
+            - 'mongo-data:/data/db'
+        ports:
+            - '27017:27017'
+        restart: always
