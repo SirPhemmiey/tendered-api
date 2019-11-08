@@ -13,6 +13,47 @@ const RequestModel = require('../models/request');
 require('dotenv').config();
 
 class Bid {
+    static async check() {
+        const [requests] = await of(RequestModel.find({ status: 'pending' }));
+        // console.log(requests[0].bids)
+        const current_date = new Date();
+        const allExpiredBids = [];
+        let supplier;
+        let bidId;
+        let bidPrice;
+        let requestId;
+        for (const req of requests) {
+            requestId = req._id;
+            const bids = req.bids;
+            for (const bid of bids) {
+                const expire_date = new Date(req.timeline);
+                if (expire_date.getTime() < current_date) {
+                    console.log('expired');
+                    supplier = bid.supplier;
+                    bidId = bid._id;
+                    bidPrice = bid.bid_price;
+                    allExpiredBids.push({ supplier, bidId, bidPrice, requestId });
+                } else {
+                    console.log('still time')
+                }
+            }
+        }
+        // lowest bid price is considered the best price
+        const bestBidder = allExpiredBids.reduce((prev, curr) => {
+            return prev.bidPrice < curr.bidPrice ? prev : curr;
+        }, []);
+
+        await WonBidModel.create({
+            supplier: bestBidder.supplier,
+            bid: bestBidder.bidId,
+            date: new Date(),
+        });
+        await RequestModel.updateOne({ _id: bestBidder.requestId }, {
+            status: 'completed',
+        })
+
+        console.log({ bestBidder })
+    }
     static async expiryCheck() {
         const [bids] = await of(BidModel.find({}).populate({
             path: 'request',

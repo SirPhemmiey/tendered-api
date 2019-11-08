@@ -43,17 +43,34 @@ class Supplier {
             const { output } = Boom.badRequest(ajv.errorsText(validate.errors));
             return responseFormat.handleError(res, output);
         }
-        const {
-            request,
-            bid_price,
-        } = req.body;
-        const newBid = await BidModel.create({
-            supplier,
-            request,
-            bid_date: new Date(),
-            bid_price,
-        });
-        if (newBid) {
+        try {
+            const {
+                request,
+                bid_price,
+            } = req.body;
+            // check if the request has already been completed before
+            const findRequest = await RequestModel.findOne({ _id: request });
+
+            if (findRequest.status === 'completed') {
+                logger.error('Request already been completed');
+                const { output } = Boom.badRequest();
+                output.payload.message = 'Request has already been completed. You cannot bid';
+                return responseFormat.handleError(res, output);
+            }
+
+            const bid = {
+                supplier,
+                bid_price,
+                bid_date: new Date(),
+            };
+
+            await BidModel.create(bid);
+            await RequestModel.findOneAndUpdate({
+                _id: request,
+                status: 'pending',
+            }, {
+                $push: { bids: bid },
+            });
             data = {
                 res,
                 status: message.SUCCESS,
@@ -63,6 +80,11 @@ class Supplier {
                 },
             };
             return responseFormat.handleSuccess(res, data);
+        } catch (err) {
+            logger.error('Supplier Bid Error', err);
+            const { output } = Boom.badImplementation();
+            output.payload.message = err.message;
+            return responseFormat.handleError(res, output);
         }
     }
 
@@ -125,6 +147,19 @@ class Supplier {
             output.payload.message = err.message;
             return responseFormat.handleError(res, output);
         }
+    }
+
+    /**
+     *
+     * @description Search the list of Requests
+     * @static
+     * @param {*} req Request object
+     * @param {*} res Response object
+     * @returns {object} object with an array of requests
+     * @memberof Supplier
+     */
+    static async searchRequsts(req, res) {
+
     }
 }
 

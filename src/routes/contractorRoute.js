@@ -30,7 +30,7 @@ const router = express.Router();
 
 router.post('/addRequest', authenticate(), Contractor.addRequest);
 router.get('/allRequests', authenticate(), Contractor.requests);
-router.get('/requestBids', authenticate(), Contractor.requestBids)
+router.get('/requestBids/:request', authenticate(), Contractor.requestBids)
 router.get('/deleteRequest', authenticate(), Contractor.deleteRequest);
 
 module.exports = router;

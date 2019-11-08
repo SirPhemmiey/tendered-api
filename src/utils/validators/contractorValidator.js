@@ -6,7 +6,7 @@ exports.contractorAddRequest = {
             type: 'string',
         },
         year: {
-            type: 'string',
+            type: 'integer',
         },
         model: {
             type: 'string',

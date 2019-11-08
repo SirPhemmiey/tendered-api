@@ -1,6 +1,12 @@
 /* eslint-disable eol-last */
 /* eslint-disable indent */
 const mongoose = require('mongoose');
+const BidSchema = require('mongoose').model('Bid').schema;
+
+function validTimeline(e) {
+    const d = new Date();
+    return e && e > d;
+}
 
 const requestSchema = new mongoose.Schema({
     contractor: {
@@ -8,7 +14,7 @@ const requestSchema = new mongoose.Schema({
         ref: 'Contractor',
     },
     machine_name: String,
-    year: String,
+    year: Number,
     model: String,
     capacity: String,
     location: String,
@@ -17,7 +23,11 @@ const requestSchema = new mongoose.Schema({
         enum: ['pending', 'completed'],
     },
     post_date: Date,
-    timeline: Date,
+    timeline: {
+        type: Date,
+        validate: [validTimeline, 'Value of expired_at should be specified and it must be in a future'],
+    },
+    bids: [BidSchema],
 }, {
     versionKey: false,
 });

@@ -122,6 +122,7 @@ class Contractor {
         const contractor = req.contractor.id;
         const validate = ajv.compile(schema.contractorListRequests);
         let data = {};
+        let requests;
 
         // Validate the request or query params
         const valid_schema = validate(req.query);
@@ -131,7 +132,12 @@ class Contractor {
             return responseFormat.handleError(res, output);
         }
         try {
-            const requests = await RequestModel.find({ contractor, status }).select('-__v -updatedAt -createdAt');
+            // manage all status occurences and none
+            if (status) {
+                requests = await RequestModel.find({ contractor, status }).select('-__v -updatedAt -createdAt');
+            } else {
+                requests = await RequestModel.find({ contractor }).select('-__v -updatedAt -createdAt');
+            }
             data = {
                 res,
                 status: message.SUCCESS,
@@ -160,12 +166,12 @@ class Contractor {
      */
 
     static async requestBids(req, res) {
-        const request = req.body.request;
+        const request = req.params.request;
         const validate = ajv.compile(schema.contractorRequestBids);
         let data = {};
 
         // Validate the request or query params
-        const valid_schema = validate(req.body);
+        const valid_schema = validate(req.params);
         if (!valid_schema) {
             logger.error('Ajv Validation Error: %o', ajv.errorsText(validate.errors));
             const { output } = Boom.badRequest(ajv.errorsText(validate.errors));

@@ -7,14 +7,6 @@ const bidSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Supplier',
     },
-    contractor: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Contractor',
-    },
-    request: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Request',
-    },
     bid_date: {
         type: Date,
     },
@@ -28,8 +20,6 @@ const bidSchema = new mongoose.Schema({
 // define compound indexes in the schema
 bidSchema.index({
     supplier: 1,
-    contractor: 1,
-    request: 1,
 });
 
 

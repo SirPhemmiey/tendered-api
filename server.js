@@ -75,8 +75,8 @@ app.use((req, res, next) => {
     res.status(errorObj.statusCode).json(errorObj);
 });
 
-(async() => {
-    await agendaStart();
-})
-();
+// (async() => {
+//     await agendaStart();
+// })
+// ();
 module.exports = app;
