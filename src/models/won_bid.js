@@ -21,7 +21,7 @@ const wonBidSchema = new mongoose.Schema({
 // define compound indexes in the schema
 wonBidSchema.index({
     supplier: 1,
-    bids: 1,
+    bid: 1,
 });
 
 
