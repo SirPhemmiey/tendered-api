@@ -21,6 +21,7 @@ function authenticate() {
                 return responseFormat.handleError(res, output);
             }
             req.contractor = data;
+            req.user_type = 'contractor';
             next();
         })(req, res, next);
     };
@@ -28,9 +29,9 @@ function authenticate() {
 
 const router = express.Router();
 
+router.get('/requestBids/:request', authenticate(), Contractor.requestBids)
 router.post('/addRequest', authenticate(), Contractor.addRequest);
 router.get('/allRequests', authenticate(), Contractor.requests);
-router.get('/requestBids/:request', authenticate(), Contractor.requestBids)
 router.get('/deleteRequest', authenticate(), Contractor.deleteRequest);
 
 module.exports = router;

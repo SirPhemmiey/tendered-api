@@ -1,7 +1,6 @@
 /* eslint-disable eol-last */
 /* eslint-disable indent */
 const mongoose = require('mongoose');
-const BidSchema = require('mongoose').model('Bid').schema;
 
 function validTimeline(e) {
     const d = new Date();
@@ -27,7 +26,10 @@ const requestSchema = new mongoose.Schema({
         type: Date,
         validate: [validTimeline, 'Value of expired_at should be specified and it must be in a future'],
     },
-    bids: [BidSchema],
+    bids: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Bid',
+    }],
 }, {
     versionKey: false,
 });

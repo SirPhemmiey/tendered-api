@@ -64,12 +64,12 @@ class Supplier {
                 bid_date: new Date(),
             };
 
-            await BidModel.create(bid);
+            const savedBid = await BidModel.create(bid);
             await RequestModel.findOneAndUpdate({
                 _id: request,
                 status: 'pending',
             }, {
-                $push: { bids: bid },
+                $push: { bids: savedBid._id },
             });
             data = {
                 res,
@@ -82,6 +82,29 @@ class Supplier {
             return responseFormat.handleSuccess(res, data);
         } catch (err) {
             logger.error('Supplier Bid Error', err);
+            const { output } = Boom.badImplementation();
+            output.payload.message = err.message;
+            return responseFormat.handleError(res, output);
+        }
+    }
+
+
+    static async getRequest(req, res) {
+        const request_id = req.params.request_id;
+        let data = {};
+        try {
+            const request = await RequestModel.findOne({ _id: request_id }).lean();
+            data = {
+                res,
+                status: message.SUCCESS,
+                statusCode: code.OK,
+                data: {
+                    request,
+                },
+            };
+            return responseFormat.handleSuccess(res, data);
+        } catch (err) {
+            logger.error('Get Request Info', err);
             const { output } = Boom.badImplementation();
             output.payload.message = err.message;
             return responseFormat.handleError(res, output);

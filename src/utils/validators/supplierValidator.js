@@ -62,7 +62,7 @@ exports.supplierBid = {
             type: 'string',
         },
         bid_price: {
-            type: 'integer',
+            type: 'string',
         },
     },
     required: ['request', 'bid_price'],

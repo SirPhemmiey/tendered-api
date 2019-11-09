@@ -21,6 +21,7 @@ function authenticate() {
                 return responseFormat.handleError(res, output);
             }
             req.supplier = data;
+            req.user_type = 'supplier';
             next();
         })(req, res, next);
     };
@@ -31,5 +32,6 @@ const router = express.Router();
 router.post('/bid', authenticate(), Supplier.bidRequest);
 router.get('/liveRequests', authenticate(), Supplier.liveRequests);
 router.get('/awardedBids', authenticate(), Supplier.awardedBids);
+router.get('/getRequest/:request_id', authenticate(), Supplier.getRequest);
 
 module.exports = router;
