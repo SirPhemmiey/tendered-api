@@ -190,7 +190,7 @@ class Supplier {
      * @memberof Supplier
      */
     static async searchRequsts(req, res) {
-
+        // todo: implement search request feature 
     }
 }
 

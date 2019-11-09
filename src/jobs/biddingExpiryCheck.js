@@ -43,8 +43,6 @@ class Bid {
             return prev.bidPrice < curr.bidPrice ? prev : curr;
         }, []);
 
-        console.log({ bestBidder })
-
         await WonBidModel.create({
             supplier: bestBidder.supplier,
             bid: bestBidder.bidId,

@@ -22,18 +22,18 @@ after(() => {
 });
 
 
-it('Should register a contractor', (done) => {
-    const newContractor = {
+it('Should register a supplier', (done) => {
+    const newSupplier = {
         first_name: faker.name.firstName(),
         last_name: faker.name.lastName(),
-        username: 'contractor1',
+        username: 'supplier1',
         password: 'Password1',
         confirm_password: 'Password1',
-        type: 'contractor',
+        type: 'supplier',
     };
     request(host)
         .post('/api/v1/register')
-        .send(newContractor)
+        .send(newSupplier)
         .end((err, res) => {
             if (err) return done(err);
             const { body } = res;
@@ -46,11 +46,11 @@ it('Should register a contractor', (done) => {
         });
 });
 
-it('Should login a contractor', (done) => {
+it('Should login a supplier', (done) => {
     const loginUser = {
-        username: 'contractor1',
+        username: 'supplier1',
         password: 'Password1',
-        type: 'contractor',
+        type: 'supplier',
     };
     request(host)
         .post('/api/v1/login')
@@ -64,31 +64,6 @@ it('Should login a contractor', (done) => {
             expect(body.data).to.be.an('object');
             expect(body.statusCode).to.eq(code.OK);
             expect(token).to.be.not.empty;
-            return done();
-        });
-});
-
-
-it('Should add a new request from the contractor', (done) => {
-    const newRequest = {
-        machine_name: 'tractor',
-        year: 1992,
-        model: 'BMW1',
-        capacity: '22100',
-        location: 'ghana',
-        timeline: '2019-12-12',
-    };
-    request(host)
-        .post('/api/v1/contractor/addRequest')
-        .set('Authorization', `Bearer ${token}`)
-        .send(newRequest)
-        .expect(code.OK)
-        .end((err, res) => {
-            if (err) return done(err);
-            const { body } = res;
-            expect(body).to.be.an('object');
-            expect(body.status).to.eq(message.SUCCESS);
-            expect(body.data.message).to.eq(message.OPERATION_SUCCESS);
             return done();
         });
 });
