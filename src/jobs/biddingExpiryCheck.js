@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-newline */
 /* eslint-disable arrow-body-style */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
@@ -13,7 +14,8 @@ require('dotenv').config();
 
 class Bid {
     static async expiryCheck() {
-        const [requests] = await of(RequestModel.find({ status: 'pending' }));
+        const [requests] = await of(RequestModel.find({ status: 'pending' }).populate('bids'));
+        console.log({ requests })
         const current_date = new Date();
         const allExpiredBids = [];
         let supplier;
@@ -32,7 +34,7 @@ class Bid {
                     bidPrice = bid.bid_price;
                     allExpiredBids.push({ supplier, bidId, bidPrice, requestId });
                 } else {
-                    logger.debug('there is still time')
+                    logger.debug('there is still time');
                 }
             }
         }
@@ -40,6 +42,8 @@ class Bid {
         const bestBidder = allExpiredBids.reduce((prev, curr) => {
             return prev.bidPrice < curr.bidPrice ? prev : curr;
         }, []);
+
+        console.log({ bestBidder })
 
         await WonBidModel.create({
             supplier: bestBidder.supplier,

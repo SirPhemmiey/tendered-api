@@ -88,7 +88,15 @@ class Supplier {
         }
     }
 
-
+    /**
+     *
+     * @description Get information about a request
+     * @static
+     * @param {*} req Request object
+     * @param {*} res Response object
+     * @returns {object} object with request information
+     * @memberof Supplier
+     */
     static async getRequest(req, res) {
         const request_id = req.params.request_id;
         let data = {};
@@ -113,7 +121,7 @@ class Supplier {
 
     /**
      *
-     * @description List All Awarded Bid
+     * @description List All Awarded Bid to the supplier
      * @static
      * @param {*} req Request object
      * @param {*} res Response object
@@ -122,8 +130,8 @@ class Supplier {
      */
     static async awardedBids(req, res) {
         const supplier = req.supplier.id;
+        let data = {};
         try {
-            let data = {};
             const bids = await WonBidModel.find({ supplier }).populate('bid');
             data = {
                 res,
@@ -144,7 +152,7 @@ class Supplier {
 
     /**
      *
-     * @description List All Available Requests
+     * @description List All Available (Pending) Requests
      * @static
      * @param {*} req Request object
      * @param {*} res Response object
