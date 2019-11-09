@@ -2,7 +2,6 @@
 
 - create .env in the backend directory as per the .env.example
 
-4-
 ``  
 docker-compose up --build 
 `` 
