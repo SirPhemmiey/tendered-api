@@ -23,7 +23,7 @@ agenda.define('Request Bid Expiry check', {}, async(job, done) => {
 async function start() {
     await agenda.start();
     logger.info('agenda is running');
-    await agenda.every('3 seconds', 'Request Bid Expiry check');
+    await agenda.every('1 second', 'Request Bid Expiry check');
 }
 
 function graceful() {
