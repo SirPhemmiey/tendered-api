@@ -27,7 +27,6 @@ const options = {
             format.simple(),
             format.splat(),
             format.json(),
-
         ),
     },
     console: {
