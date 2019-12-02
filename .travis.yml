@@ -11,8 +11,6 @@ services:
    - mongodb
 before_script:
    - yarn
-   - sleep 15
-   - mongo tendered --eval 'db.createUser({user:"sirphemmiey",pwd:"Algorithm212...",roles:["readWrite"]});'
 script:
   - echo 'Testing!'
   - yarn test
