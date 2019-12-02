@@ -81,8 +81,9 @@ process.on('SIGINT', () => {
     process.exit(1);
 });
 
-(async() => {
-    await agendaStart();
-})
-();
+// todo: uncomment this in prod
+// (async() => {
+//     await agendaStart();
+// })
+// ();
 module.exports = app;
