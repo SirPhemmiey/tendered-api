@@ -6,14 +6,12 @@
         "node": "10.16.3"
     },
     "scripts": {
-        "check-coverage": "istanbul check-coverage",
-        "coverage_": "istanbul cover node_modules/mocha/bin/_mocha -- src/tests/index.js --opts src/tests/mocha.opts",
+        "check-coverage": "istanbul cover node_modules/mocha/bin/_mocha -- src/tests/index.js --opts src/tests/mocha.opts",
         "coverage": "nyc mocha src/tests/index.js --opts src/tests/mocha.opts",
         "lint": "eslint src/controllers/*.js ./tests/*.js --fix",
         "fix-lint": "eslint . --fix",
-        "test": "yarn run lint && yarn run fix-lint && yarn run coverage && yarn run check-coverage",
-        "newtest": "yarn run coverage && yarn run coverage_",
-        "run-check": "yarn run coverage && yarn run check-coverage",
+        "test": "yarn run coverage",
+        "newtest": "yarn run coverage && yarn run check-coverage",
         "startdev": "nodemon ./bin/www",
         "start": "node ./bin/www",
         "check-libs": "snyk test --dev"

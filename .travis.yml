@@ -9,4 +9,4 @@ script:
   - echo 'Installing Dependencies!'
   - yarn
   - echo 'Testing!'
-  - npm run newtest
+  - npm run test

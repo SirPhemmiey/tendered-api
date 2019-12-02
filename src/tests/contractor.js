@@ -29,8 +29,8 @@ it('Should register a contractor', (done) => {
     const newContractor = {
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
-        // username: `contractor${randomInt}`,
-        username: 'contractor1',
+        username: `contractor${randomInt(1, 1000)}`,
+        // username: 'contractor1',
         password: 'Password1',
         confirm_password: 'Password1',
         type: 'contractor',
@@ -103,8 +103,8 @@ it('Should register a supplier', (done) => {
     const newContractor = {
         firstname: faker.name.firstName(),
         lastname: faker.name.lastName(),
-        // username: `contractor${randomInt}`,
-        username: 'supplier1',
+        username: `supplier${randomInt(1, 1000)}`,
+        // username: 'supplier1',
         password: 'Password1',
         confirm_password: 'Password1',
         type: 'supplier',
