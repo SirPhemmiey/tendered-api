@@ -8,7 +8,5 @@ script:
   - echo 'Build Starts'
   - echo 'Installing Dependencies!'
   - yarn
-  - yarn start
-  - echo 'Started!'
   - echo 'Testing!'
   - npm run test
