@@ -7,10 +7,10 @@
     },
     "scripts": {
         "check-coverage": "istanbul cover node_modules/mocha/bin/_mocha -- src/tests/index.js --opts src/tests/mocha.opts",
-        "coverage_former": "nyc mocha src/tests/index.js ",
+        "coverage": "nyc mocha src/tests/index.js ",
         "ss": "yarn run pretest && jest --coverage && cat ./coverage/lcov.info | coveralls",
         "cov": "istanbul cover ./node_modules/mocha/bin/_mocha -- src/tests/index.js --opts src/tests/mocha.opts --report lcovonly -- -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
-        "coverage": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+        "coverage:coveralls": "cat coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
         "lint": "eslint src/controllers/*.js ./tests/*.js --fix",
         "fix-lint": "eslint . --fix",
         "test": "yarn run coverage",

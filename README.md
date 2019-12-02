@@ -1,8 +1,7 @@
 
 # Tendered Challenge API
-[![Build Status](https://travis-ci.org/SirPhemmiey/tendered-api.svg?branch=master)](https://travis-ci.org/SirPhemmiey/tendered-api)
+[![Build Status](https://travis-ci.org/SirPhemmiey/tendered-api.svg?branch=master)](https://travis-ci.org/SirPhemmiey/tendered-api) [![Coverage Status](https://coveralls.io/repos/github/SirPhemmiey/tendered-api/badge.svg?branch=master)](https://coveralls.io/github/SirPhemmiey/tendered-api?branch=master)
 
-[![Coverage Status](https://coveralls.io/repos/github/SirPhemmiey/tendered-api/badge.svg?branch=master)](https://coveralls.io/github/SirPhemmiey/tendered-api?branch=master)
 
 ### Installing
 * Run: ```git clone https://github.com/SirPhemmiey/tendered-api.git```
