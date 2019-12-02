@@ -15,7 +15,6 @@ require('dotenv').config();
 class Bid {
     static async expiryCheck() {
         const [requests] = await of(RequestModel.find({ status: 'pending' }).populate('bids'));
-        console.log({ requests })
         const current_date = new Date();
         const allExpiredBids = [];
         let supplier;

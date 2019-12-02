@@ -49,6 +49,7 @@
         "@bugsnag/js": "^6.4.3",
         "@bugsnag/plugin-express": "^6.4.1",
         "chai": "^4.2.0",
+        "coveralls": "^3.0.9",
         "debug": "^4.1.1",
         "eslint": "^6.6.0",
         "eslint-config-airbnb-base": "^14.0.0",
