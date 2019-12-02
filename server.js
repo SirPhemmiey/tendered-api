@@ -81,8 +81,8 @@ process.on('SIGINT', () => {
     process.exit(1);
 });
 
-// (async() => {
-//     await agendaStart();
-// })
-// ();
+(async() => {
+    await agendaStart();
+})
+();
 module.exports = app;
