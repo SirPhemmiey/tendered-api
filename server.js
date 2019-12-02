@@ -75,6 +75,12 @@ app.use((req, res, next) => {
     res.status(errorObj.statusCode).json(errorObj);
 });
 
+process.on('SIGINT', () => {
+    logger.debug('\nGracefully shutting down from SIGINT (Ctrl-C)');
+    // some other closing procedures go here
+    process.exit(1);
+});
+
 (async() => {
     await agendaStart();
 })

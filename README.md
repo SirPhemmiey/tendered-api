@@ -1,24 +1,25 @@
 
+# Tendered Challenge API
+[![Build Status](https://travis-ci.org/SirPhemmiey/tendered-api.svg?branch=master)](https://travis-ci.org/SirPhemmiey/tendered-api)
 
-- create .env in the backend directory as per the .env.example
+### Installing
+* Run: ```git clone https://github.com/SirPhemmiey/tendered-api.git```
+* Navigate to the project directory ```cd tendered-api```
+* Run: ```npm install``` or ```yarn``` to install dependencies
+* Create a .env file in your root directory and copy content from ```.env.sample``` file to ```.env``` file and set environment variables with the appropriate values
 
-``  
-docker-compose up --build 
-`` 
+### Running
+* Run: ```npm start``` or ```yarn start```
+* Or with docker with ```docker-compose up --build```
 
+## Endpoints
 
-Db schema:
+https://documenter.getpostman.com/view/3683187/SW18wF84
 
-
-I used MongoDb and below is the link to the schema
+## Database Schema
 
 https://dbdiagram.io/d/5dc3af71edf08a25543d9ff2
 
-I used mongoose as an ODM in the node js backend
-
-
-###Requests:
-Please refer to the postman json collection: https://documenter.getpostman.com/view/3683187/SW18wF84
 
 
  

@@ -1,9 +1,12 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable eol-last */
 /* eslint-disable indent */
 /* eslint-disable no-undef */
 const request = require('supertest');
 const { expect } = require('chai');
 const faker = require('faker');
+const randomInt = require('random-int');
 const code = require('http-status-codes');
 const message = require('../constants/messages');
 
@@ -24,8 +27,9 @@ after(() => {
 
 it('Should register a contractor', (done) => {
     const newContractor = {
-        first_name: faker.name.firstName(),
-        last_name: faker.name.lastName(),
+        firstname: faker.name.firstName(),
+        lastname: faker.name.lastName(),
+        // username: `contractor${randomInt}`,
         username: 'contractor1',
         password: 'Password1',
         confirm_password: 'Password1',
@@ -94,3 +98,28 @@ it('Should add a new request from the contractor', (done) => {
 });
 
 // todo: complete writing all tests
+
+it('Should register a supplier', (done) => {
+    const newContractor = {
+        firstname: faker.name.firstName(),
+        lastname: faker.name.lastName(),
+        // username: `contractor${randomInt}`,
+        username: 'supplier1',
+        password: 'Password1',
+        confirm_password: 'Password1',
+        type: 'supplier',
+    };
+    request(host)
+        .post('/api/v1/register')
+        .send(newContractor)
+        .end((err, res) => {
+            if (err) return done(err);
+            const { body } = res;
+            expect(body).to.be.an('object');
+            expect(body).to.have.all.keys(['statusCode', 'status', 'data']);
+            expect(body.statusCode).to.eq(code.CREATED);
+            expect(body.status).to.eq(message.SUCCESS);
+            expect(body.data).to.be.an('object');
+            return done();
+        });
+});
