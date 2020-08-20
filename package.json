@@ -26,7 +26,7 @@
         "ajv-errors": "^1.0.1",
         "app-root-path": "^3.0.0",
         "await-of": "^1.2.0",
-        "bcrypt": "^3.0.6",
+        "bcrypt": "^5.0.0",
         "boom": "^7.3.0",
         "check-dependencies": "^1.1.0",
         "compression": "^1.7.4",
